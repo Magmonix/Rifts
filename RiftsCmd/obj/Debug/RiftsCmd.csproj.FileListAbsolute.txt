@@ -1,0 +1,7 @@
+C:\VB Training\Practice Exercises\Rifts\Rifts\RiftsCmd\bin\Debug\RiftsCmd.exe.config
+C:\VB Training\Practice Exercises\Rifts\Rifts\RiftsCmd\bin\Debug\RiftsCmd.exe
+C:\VB Training\Practice Exercises\Rifts\Rifts\RiftsCmd\bin\Debug\RiftsCmd.pdb
+C:\VB Training\Practice Exercises\Rifts\Rifts\RiftsCmd\obj\Debug\RiftsCmd.csprojAssemblyReference.cache
+C:\VB Training\Practice Exercises\Rifts\Rifts\RiftsCmd\obj\Debug\RiftsCmd.csproj.CoreCompileInputs.cache
+C:\VB Training\Practice Exercises\Rifts\Rifts\RiftsCmd\obj\Debug\RiftsCmd.exe
+C:\VB Training\Practice Exercises\Rifts\Rifts\RiftsCmd\obj\Debug\RiftsCmd.pdb
