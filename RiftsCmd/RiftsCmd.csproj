@@ -47,7 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="DiceRoll" />
+    <Compile Include="Combat.cs" />
     <Compile Include="DiceRoll.cs" />
     <Compile Include="MainApp.cs" />
     <Compile Include="Stats.cs" />

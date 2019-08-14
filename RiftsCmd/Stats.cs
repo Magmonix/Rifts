@@ -5,6 +5,20 @@ namespace RiftsCmd
     class Stats
     {
         public static string[] stats = new string[12];
+        public static string name;
+        public static int strike;
+        public static int parry;
+        public static int dodge;
+        public static int crit;
+        public static int atk;
+        public static int MDC;
+        public static int forceField;
+        public static int armor;
+        public static int PPE;
+        public static int ISP;
+        public static int darkPoints;
+
+
 
         public static void CreateOrViewCharacter()
         {
@@ -12,36 +26,14 @@ namespace RiftsCmd
             {
                 Console.Clear();
                 stats = GetStats(); //Get the character's stats
-                string name = stats[0]; //Save each stat as its own variable so we don't have to know that stats[0] is the name, etc.
-                int strike = int.Parse(stats[1]);
-                int parry = int.Parse(stats[2]);
-                int dodge = int.Parse(stats[3]);
-                int crit = int.Parse(stats[4]);
-                int atk = int.Parse(stats[5]);
-                int MDC = int.Parse(stats[6]);
-                int forceField = int.Parse(stats[7]);
-                int armor = int.Parse(stats[8]);
-                int PPE = int.Parse(stats[9]);
-                int ISP = int.Parse(stats[10]);
-                int darkPoints = int.Parse(stats[11]);
+                ReinitializeStats();
                 OutputStats(name, strike, parry, dodge, crit, atk, MDC, forceField, armor, PPE, ISP, darkPoints); //Output these stats to the console
                 MainApp.Main();
             }
             else //View Created Character's Stats
             {
                 Console.Clear();
-                string name = stats[0];
-                int strike = int.Parse(stats[1]);
-                int parry = int.Parse(stats[2]);
-                int dodge = int.Parse(stats[3]);
-                int crit = int.Parse(stats[4]);
-                int atk = int.Parse(stats[5]);
-                int MDC = int.Parse(stats[6]);
-                int forceField = int.Parse(stats[7]);
-                int armor = int.Parse(stats[8]);
-                int PPE = int.Parse(stats[9]);
-                int ISP = int.Parse(stats[10]);
-                int darkPoints = int.Parse(stats[11]);
+                ReinitializeStats();
                 OutputStats(name, strike, parry, dodge, crit, atk, MDC, forceField, armor, PPE, ISP, darkPoints);
                 MainApp.Main();
             }
@@ -49,18 +41,8 @@ namespace RiftsCmd
 
         public static void EditStats()
         {
-            string name = stats[0];
-            int strike = int.Parse(stats[1]);
-            int parry = int.Parse(stats[2]);
-            int dodge = int.Parse(stats[3]);
-            int crit = int.Parse(stats[4]);
-            int atk = int.Parse(stats[5]);
-            int MDC = int.Parse(stats[6]);
-            int forceField = int.Parse(stats[7]);
-            int armor = int.Parse(stats[8]);
-            int PPE = int.Parse(stats[9]);
-            int ISP = int.Parse(stats[10]);
-            int darkPoints = int.Parse(stats[11]);
+            //TODO: Add exception for a character not existing. Should we ask to redirect user to CreateOrViewCharacter()?
+
             Console.Clear();
             Console.WriteLine("Which stat do you want to edit?");
             Console.WriteLine("1: Name");
@@ -73,7 +55,7 @@ namespace RiftsCmd
             Console.WriteLine("8: ForceField");
             Console.WriteLine("9: Armor");
             Console.WriteLine("10: PPE");
-            Console.WriteLine("11: SP");
+            Console.WriteLine("11: ISP");
             Console.WriteLine("12: Dark Points");
             string input = Console.ReadLine();
             int inputToInt = int.Parse(input);
@@ -180,6 +162,22 @@ namespace RiftsCmd
             Console.WriteLine("ISP: " + ISP);
             Console.WriteLine("Dark Points: " + darkPoints);
             Console.ReadLine();
+        }
+
+        public static void ReinitializeStats()
+        {
+            name = stats[0]; //Save each stat as its own variable so we don't have to know that stats[0] is the name, etc.
+            strike = int.Parse(stats[1]);
+            parry = int.Parse(stats[2]);
+            dodge = int.Parse(stats[3]);
+            crit = int.Parse(stats[4]);
+            atk = int.Parse(stats[5]);
+            MDC = int.Parse(stats[6]);
+            forceField = int.Parse(stats[7]);
+            armor = int.Parse(stats[8]);
+            PPE = int.Parse(stats[9]);
+            ISP = int.Parse(stats[10]);
+            darkPoints = int.Parse(stats[11]);
         }
 
         public static string[] GetStats() //Run each of the gets and save the returns to a string array
