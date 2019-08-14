@@ -17,6 +17,17 @@ namespace RiftsCmd
         public static int PPE;
         public static int ISP;
         public static int darkPoints;
+        public static int currentStrike;
+        public static int currentParry;
+        public static int currentDodge;
+        public static int currentCrit;
+        public static int currentAtk;
+        public static int currentMDC;
+        public static int currentForceField;
+        public static int currentArmor;
+        public static int currentPPE;
+        public static int currentISP;
+        public static int currentDarkPoints;
 
 
 
@@ -25,12 +36,12 @@ namespace RiftsCmd
             if (String.IsNullOrEmpty(stats[0]) == true) //Create Character
             {
                 Console.Clear();
-                stats = GetStats(); //Get the character's stats
-                ReinitializeStats();
-                OutputStats(name, strike, parry, dodge, crit, atk, MDC, forceField, armor, PPE, ISP, darkPoints); //Output these stats to the console
+                stats = GetStats();
+                InitializeStats();
+                OutputStats(name, strike, parry, dodge, crit, atk, MDC, forceField, armor, PPE, ISP, darkPoints);
                 MainApp.Main();
             }
-            else //View Created Character's Stats
+            else //View Stats
             {
                 Console.Clear();
                 ReinitializeStats();
@@ -135,7 +146,7 @@ namespace RiftsCmd
                     break;
                 default:
                     Console.WriteLine("You must make a valid selection");
-                    Console.ReadKey();
+                    Console.ReadLine();
                     MainApp.Main();
                     break;
 
@@ -164,9 +175,35 @@ namespace RiftsCmd
             Console.ReadLine();
         }
 
+        public static void InitializeStats()
+        {
+            name = stats[0];
+            strike = int.Parse(stats[1]);
+            parry = int.Parse(stats[2]);
+            dodge = int.Parse(stats[3]);
+            crit = int.Parse(stats[4]);
+            atk = int.Parse(stats[5]);
+            MDC = int.Parse(stats[6]);
+            forceField = int.Parse(stats[7]);
+            armor = int.Parse(stats[8]);
+            PPE = int.Parse(stats[9]);
+            ISP = int.Parse(stats[10]);
+            darkPoints = int.Parse(stats[11]);
+            currentStrike = int.Parse(stats[1]);
+            currentParry = int.Parse(stats[2]);
+            currentDodge = int.Parse(stats[3]);
+            currentCrit = int.Parse(stats[4]);
+            currentAtk = int.Parse(stats[5]);
+            currentMDC = int.Parse(stats[6]);
+            currentForceField = int.Parse(stats[7]);
+            currentArmor = int.Parse(stats[8]);
+            currentPPE = int.Parse(stats[9]);
+            currentISP = int.Parse(stats[10]);
+            currentDarkPoints = int.Parse(stats[11]);
+        }
         public static void ReinitializeStats()
         {
-            name = stats[0]; //Save each stat as its own variable so we don't have to know that stats[0] is the name, etc.
+            name = stats[0]; 
             strike = int.Parse(stats[1]);
             parry = int.Parse(stats[2]);
             dodge = int.Parse(stats[3]);

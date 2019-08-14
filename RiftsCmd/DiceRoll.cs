@@ -45,7 +45,7 @@ namespace RiftsCmd
         //            break;
         //        default:
         //            Console.WriteLine("You must make a valid selection");
-        //            Console.ReadKey();
+        //            Console.ReadLine();
         //            DiceMain();
         //            break;
         //    }
