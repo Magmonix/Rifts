@@ -48,7 +48,48 @@ namespace RiftsCmd
 
         public static void Attack()
         {
-            //Need atks, crit, dmg, d20, consumables
+            Console.Clear();
+            Console.WriteLine("Choose your attack type");
+            Console.WriteLine("1: Magical");
+            Console.WriteLine("2: Non-Magical");
+            Console.WriteLine("3: Return to Combat Menu");
+            string input = Console.ReadLine();
+            int inputToInt = int.Parse(input);
+            switch (inputToInt)
+            {
+                case 1:
+                    magicalAtks -= 1;
+
+                    ConsumablesCheck();
+                    //Type of Spell
+                    //Roll for hit
+                    //D20 check
+                    //Check if Hit
+                    //Check if Crit
+                    //Calculate dmg
+                    break;
+                case 2:
+                    nonmagicalAtks -= 1;
+
+                    ConsumablesCheck();
+                    //Type of Weapon
+                    //Roll for hit
+                    //D20 check
+                    //Check if Hit
+                    //Check if Crit
+                    //Calculate dmg
+                    break;
+                case 3:
+                    CombatMenu();
+                    break;
+                default:
+                    Console.Clear();
+                    Console.WriteLine("Please make a valid selection");
+                    Console.ReadLine();
+                    CombatMenu();
+                    break;
+            }
+
         }
 
         public static void Defend()

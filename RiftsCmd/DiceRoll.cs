@@ -5,52 +5,6 @@ namespace RiftsCmd
     class DiceRoll
     {
         static Random rng = new Random();
-
-        //This code was being used for testing purposes
-        //public static void DiceMain() 
-        //{
-        //    Console.Clear();
-        //    Console.WriteLine("What dice would you like to roll?");
-        //    Console.WriteLine("1: D4");
-        //    Console.WriteLine("2: D6");
-        //    Console.WriteLine("3: D8");
-        //    Console.WriteLine("4: D10");
-        //    Console.WriteLine("5: D12");
-        //    Console.WriteLine("6: D20");
-        //    Console.WriteLine("7: Percentile");
-        //    string choice = Console.ReadLine();
-        //    int choiceToInt = int.Parse(choice);
-        //    switch (choiceToInt)
-        //    {
-        //        case 1:
-        //            RollD4();
-        //            break;
-        //        case 2:
-        //            RollD6();
-        //            break;
-        //        case 3:
-        //            RollD8();
-        //            break;
-        //        case 4:
-        //            RollD10();
-        //            break;
-        //        case 5:
-        //            RollD12();
-        //            break;
-        //        case 6:
-        //            RollD20();
-        //            break;
-        //        case 7:
-        //            RollPercentile();
-        //            break;
-        //        default:
-        //            Console.WriteLine("You must make a valid selection");
-        //            Console.ReadLine();
-        //            DiceMain();
-        //            break;
-        //    }
-        //} 
-
         #region Roll Dice
         public static int RollD4()
         {
