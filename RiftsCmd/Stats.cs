@@ -4,13 +4,15 @@ namespace RiftsCmd
 {
     class Stats
     {
-        public static string[] stats = new string[12];
+        public static string[] stats = new string[14];
         public static string name;
         public static int strike;
         public static int parry;
         public static int dodge;
         public static int crit;
-        public static int atk;
+        public static int allAtk;
+        public static int magicalAtk;
+        public static int physicalAtk;
         public static int MDC;
         public static int forceField;
         public static int armor;
@@ -21,7 +23,9 @@ namespace RiftsCmd
         public static int currentParry;
         public static int currentDodge;
         public static int currentCrit;
-        public static int currentAtk;
+        public static int currentAllAtk;
+        public static int currentMagicalAtk;
+        public static int currentPhysicalAtk;
         public static int currentMDC;
         public static int currentForceField;
         public static int currentArmor;
@@ -38,14 +42,14 @@ namespace RiftsCmd
                 Console.Clear();
                 stats = GetStats();
                 InitializeStats();
-                OutputStats(name, strike, parry, dodge, crit, atk, MDC, forceField, armor, PPE, ISP, darkPoints);
+                OutputStats(name, strike, parry, dodge, crit, allAtk, magicalAtk, physicalAtk, MDC, forceField, armor, PPE, ISP, darkPoints);
                 MainApp.Main();
             }
             else //View Stats
             {
                 Console.Clear();
                 ReinitializeStats();
-                OutputStats(name, strike, parry, dodge, crit, atk, MDC, forceField, armor, PPE, ISP, darkPoints);
+                OutputStats(name, strike, parry, dodge, crit, allAtk, magicalAtk, physicalAtk, MDC, forceField, armor, PPE, ISP, darkPoints);
                 MainApp.Main();
             }
         }
@@ -61,13 +65,15 @@ namespace RiftsCmd
             Console.WriteLine("3: Parry");
             Console.WriteLine("4: Dodge");
             Console.WriteLine("5: Crit");
-            Console.WriteLine("6: ATK");
-            Console.WriteLine("7: MDC");
-            Console.WriteLine("8: ForceField");
-            Console.WriteLine("9: Armor");
-            Console.WriteLine("10: PPE");
-            Console.WriteLine("11: ISP");
-            Console.WriteLine("12: Dark Points");
+            Console.WriteLine("6: All Attacks");
+            Console.WriteLine("7: Magical Attacks");
+            Console.WriteLine("8: Physical Attacks");
+            Console.WriteLine("9: MDC");
+            Console.WriteLine("10: ForceField");
+            Console.WriteLine("11: Armor");
+            Console.WriteLine("12: PPE");
+            Console.WriteLine("13: ISP");
+            Console.WriteLine("14: Dark Points");
             string input = Console.ReadLine();
             int inputToInt = int.Parse(input);
             switch (inputToInt)
@@ -104,44 +110,56 @@ namespace RiftsCmd
                     break;
                 case 6:
                     Console.Clear();
-                    Console.WriteLine("What is the new ATK?");
+                    Console.WriteLine("What is the new All Attacks?");
                     stats[5] = Console.ReadLine();
                     CreateOrViewCharacter();
-                    break;
+                    break;                
                 case 7:
                     Console.Clear();
-                    Console.WriteLine("What is the new MDC?");
+                    Console.WriteLine("What is the new Magical Attacks?");
                     stats[6] = Console.ReadLine();
                     CreateOrViewCharacter();
                     break;
                 case 8:
                     Console.Clear();
-                    Console.WriteLine("What is the new Force Field?");
+                    Console.WriteLine("What is the new Physical Attacks?");
                     stats[7] = Console.ReadLine();
                     CreateOrViewCharacter();
                     break;
                 case 9:
                     Console.Clear();
-                    Console.WriteLine("What is the new Armor?");
+                    Console.WriteLine("What is the new MDC?");
                     stats[8] = Console.ReadLine();
                     CreateOrViewCharacter();
                     break;
                 case 10:
                     Console.Clear();
-                    Console.WriteLine("What is the new PPE?");
+                    Console.WriteLine("What is the new Force Field?");
                     stats[9] = Console.ReadLine();
                     CreateOrViewCharacter();
                     break;
                 case 11:
                     Console.Clear();
-                    Console.WriteLine("What is the new ISP?");
+                    Console.WriteLine("What is the new Armor?");
                     stats[10] = Console.ReadLine();
                     CreateOrViewCharacter();
                     break;
                 case 12:
                     Console.Clear();
-                    Console.WriteLine("What is the new Dark Points?");
+                    Console.WriteLine("What is the new PPE?");
                     stats[11] = Console.ReadLine();
+                    CreateOrViewCharacter();
+                    break;
+                case 13:
+                    Console.Clear();
+                    Console.WriteLine("What is the new ISP?");
+                    stats[12] = Console.ReadLine();
+                    CreateOrViewCharacter();
+                    break;
+                case 14:
+                    Console.Clear();
+                    Console.WriteLine("What is the new Dark Points?");
+                    stats[13] = Console.ReadLine();
                     CreateOrViewCharacter();
                     break;
                 default:
@@ -156,7 +174,7 @@ namespace RiftsCmd
         }
 
         public static void OutputStats(string name, int strike, int parry, int dodge, 
-                                        int crit, int atk, int MDC, int forceField, 
+                                        int crit, int allAtk, int magicalAtk, int physicalAtk, int MDC, int forceField, 
                                         int armor, int PPE, int ISP, int darkPoints)
         {
             Console.Clear();
@@ -165,7 +183,9 @@ namespace RiftsCmd
             Console.WriteLine("Parry: " + parry);
             Console.WriteLine("Dodge: " + dodge);
             Console.WriteLine("Crit: " + crit);
-            Console.WriteLine("ATK's: " + atk);
+            Console.WriteLine("All Atk's: " + allAtk);
+            Console.WriteLine("Magic Atk's: " + magicalAtk);
+            Console.WriteLine("Physical Atk's: " + physicalAtk);
             Console.WriteLine("MDC: " + MDC);
             Console.WriteLine("Force Field: " + forceField);
             Console.WriteLine("Armor: " + armor);
@@ -182,39 +202,45 @@ namespace RiftsCmd
             parry = int.Parse(stats[2]);
             dodge = int.Parse(stats[3]);
             crit = int.Parse(stats[4]);
-            atk = int.Parse(stats[5]);
-            MDC = int.Parse(stats[6]);
-            forceField = int.Parse(stats[7]);
-            armor = int.Parse(stats[8]);
-            PPE = int.Parse(stats[9]);
-            ISP = int.Parse(stats[10]);
-            darkPoints = int.Parse(stats[11]);
+            allAtk = int.Parse(stats[5]);
+            magicalAtk = int.Parse(stats[6]);
+            physicalAtk = int.Parse(stats[7]);
+            MDC = int.Parse(stats[8]);
+            forceField = int.Parse(stats[9]);
+            armor = int.Parse(stats[10]);
+            PPE = int.Parse(stats[11]);
+            ISP = int.Parse(stats[12]);
+            darkPoints = int.Parse(stats[13]);
             currentStrike = int.Parse(stats[1]);
             currentParry = int.Parse(stats[2]);
             currentDodge = int.Parse(stats[3]);
             currentCrit = int.Parse(stats[4]);
-            currentAtk = int.Parse(stats[5]);
-            currentMDC = int.Parse(stats[6]);
-            currentForceField = int.Parse(stats[7]);
-            currentArmor = int.Parse(stats[8]);
-            currentPPE = int.Parse(stats[9]);
-            currentISP = int.Parse(stats[10]);
-            currentDarkPoints = int.Parse(stats[11]);
+            currentAllAtk = int.Parse(stats[5]);
+            currentMagicalAtk = int.Parse(stats[6]);
+            currentPhysicalAtk = int.Parse(stats[7]);
+            currentMDC = int.Parse(stats[8]);
+            currentForceField = int.Parse(stats[9]);
+            currentArmor = int.Parse(stats[10]);
+            currentPPE = int.Parse(stats[11]);
+            currentISP = int.Parse(stats[12]);
+            currentDarkPoints = int.Parse(stats[13]);
         }
         public static void ReinitializeStats()
         {
-            name = stats[0]; 
+            name = stats[0];
             strike = int.Parse(stats[1]);
             parry = int.Parse(stats[2]);
             dodge = int.Parse(stats[3]);
             crit = int.Parse(stats[4]);
-            atk = int.Parse(stats[5]);
-            MDC = int.Parse(stats[6]);
-            forceField = int.Parse(stats[7]);
-            armor = int.Parse(stats[8]);
-            PPE = int.Parse(stats[9]);
-            ISP = int.Parse(stats[10]);
-            darkPoints = int.Parse(stats[11]);
+            allAtk = int.Parse(stats[5]);
+            magicalAtk = int.Parse(stats[6]);
+            physicalAtk = int.Parse(stats[7]);
+            MDC = int.Parse(stats[8]);
+            forceField = int.Parse(stats[9]);
+            armor = int.Parse(stats[10]);
+            PPE = int.Parse(stats[11]);
+            ISP = int.Parse(stats[12]);
+            darkPoints = int.Parse(stats[13]);
         }
 
         public static string[] GetStats() //Run each of the gets and save the returns to a string array
@@ -224,13 +250,15 @@ namespace RiftsCmd
             stats[2] = GetParry();
             stats[3] = GetDodge();
             stats[4] = GetCrit();
-            stats[5] = GetAtk();
-            stats[6] = GetMDC();
-            stats[7] = GetForceField();
-            stats[8] = GetArmor();
-            stats[9] = GetPPE();
-            stats[10]= GetISP();
-            stats[11]= GetDarkPoints();
+            stats[5] = GetAllAtk();
+            stats[6] = GetMagicalAtk();
+            stats[7] = GetPhysicalAtk();
+            stats[8] = GetMDC();
+            stats[9] = GetForceField();
+            stats[10] = GetArmor();
+            stats[11] = GetPPE();
+            stats[12]= GetISP();
+            stats[13]= GetDarkPoints();
             return (stats);
         }
 
@@ -266,9 +294,21 @@ namespace RiftsCmd
             string crit = Console.ReadLine();
             return (crit);
         }
-        public static string GetAtk()
+        public static string GetAllAtk()
         {
-            Console.Write("Input Atk: ");
+            Console.Write("Input All Atk: ");
+            string atk = Console.ReadLine();
+            return (atk);
+        }
+        public static string GetMagicalAtk()
+        {
+            Console.Write("Input Magical Atk: ");
+            string atk = Console.ReadLine();
+            return (atk);
+        }        
+        public static string GetPhysicalAtk()
+        {
+            Console.Write("Input Physical Atk: ");
             string atk = Console.ReadLine();
             return (atk);
         }

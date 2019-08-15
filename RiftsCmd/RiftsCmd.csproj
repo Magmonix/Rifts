@@ -47,7 +47,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AttackTypes.cs" />
     <Compile Include="Combat.cs" />
+    <Compile Include="Consumables.cs" />
     <Compile Include="DiceRoll.cs" />
     <Compile Include="MainApp.cs" />
     <Compile Include="Stats.cs" />
