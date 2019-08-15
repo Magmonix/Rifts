@@ -16,7 +16,7 @@ namespace RiftsCmd
             switch (inputToInt)
             {
                 case 1:
-                    return (Spell_AirBlast());
+                    return (Spell_AirBlast()); //TODO: Need to check if we have enough PPE to cast the spell before we call the function
                 case 9:
                     Combat.CombatMenu();
                     break;

@@ -98,6 +98,7 @@ namespace RiftsCmd
 
         public static void Attack()
         {
+            bool isCrit = false;
             Console.Clear();
             Console.WriteLine("Choose your attack type");
             Console.WriteLine("1: Magical");
@@ -109,8 +110,6 @@ namespace RiftsCmd
             {
                 case 1:
                     int dmg = AttackTypes.MagicAttacks();
-                    Console.WriteLine(dmg);
-                    Console.ReadLine();
                     Consumables.ConsumablesCheck();
                     if (magicalAtks > 0)
                     {
@@ -120,12 +119,79 @@ namespace RiftsCmd
                     {
                         allAtks -= 1;
                     }
-                    //Roll for hit
-                    //D20 check
-                    //Check if Hit
-                    //Check if Crit
-                    //Calculate dmg
+                    int d20 = DiceRoll.RollD20();
+                    //TODO: Add strike buffs here
+                    Console.Clear();
+                    Console.WriteLine("You rolled a " + d20 + " for a total of " + (d20 + Stats.currentStrike));
+                    //TODO: Remove Strike buffs here
+                    //TODO: Add crit buffs here
+                    if (d20 >= Stats.currentCrit)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("You crit with a roll of " + d20 + "!!!!");
+                        isCrit = true;
+                    }
+                    //TODO: Remove crit buffs here
+                    Console.WriteLine("Did you hit?");
+                    Console.WriteLine("1: Yes");
+                    Console.WriteLine("2: No");
+                    input = Console.ReadLine();
+                    inputToInt = int.Parse(input);
+                    Boolean again = true;
+                    while (again)
+                    {
+                        again = false;
+                        switch (inputToInt)
+                        {
+                            case 1:
+                                Console.Clear();
+                                if (isCrit == true)
+                                {
+                                    Console.WriteLine("Did you crit for full damage?");
+                                    Console.WriteLine("1: Yes");
+                                    Console.WriteLine("2: No");
+                                    input = Console.ReadLine();
+                                    inputToInt = int.Parse(input);
+                                    switch (inputToInt)
+                                    {
+                                        case 1:
+                                            Console.WriteLine("You critically hit for " + (dmg * 2) + " damage!");
+                                            Console.ReadLine();
+                                            //TODO: Add validation step so user can't accidentally skip this page
+                                            CombatMenu();
+                                            break;
+                                        case 2:
+                                            Console.WriteLine("You hit for " + dmg + " damage!");
+                                            Console.ReadLine();
+                                            //TODO: Add validation step so user can't accidentally skip this page
+                                            CombatMenu();
+                                            break;
+                                        default:
+                                            Console.Clear();
+                                            Console.WriteLine("You must enter a valid input of 1 or 2");
+                                            Console.ReadLine();
+                                            again = true;
+                                            break;
+                                    }
+                                }
+                                Console.WriteLine("You hit for " + dmg + " damage!");
+                                Console.ReadLine();
+                                //TODO: Add validation step so user can't accidentally skip this page
+                                CombatMenu();
+                                break;
+                            case 2:
+                                CombatMenu();
+                                break;
+                            default:
+                                Console.Clear();
+                                Console.WriteLine("You must enter a valid input of 1 or 2");
+                                Console.ReadLine();
+                                again = true;
+                                break;
+                        }
+                    }
                     break;
+
                 case 2:
                     if (physicalAtks > 0)
                     {
@@ -136,12 +202,7 @@ namespace RiftsCmd
                         allAtks -= 1;
                     }
                     Consumables.ConsumablesCheck();
-                    //Type of Weapon
-                    //Roll for hit
-                    //D20 check
-                    //Check if Hit
-                    //Check if Crit
-                    //Calculate dmg
+                    //TODO: Follow the format of the magic attack logic
                     break;
                 case 3:
                     CombatMenu();
@@ -163,28 +224,32 @@ namespace RiftsCmd
             Console.WriteLine("Are you going to Dodge or Parry?");
             Console.WriteLine("1: Parry");
             Console.WriteLine("2: Dodge");
-            Console.WriteLine("3: Back to Main Menu");
+            Console.WriteLine("3: Back to Combat Menu");
             string input = Console.ReadLine();
             int inputToInt = int.Parse(input);
             switch (inputToInt)
             {
                 case 1:
                     Console.WriteLine("Are you rolling at -6?");
-                    Console.Write("Y/N: ");
+                    Console.WriteLine("1: Yes");
+                    Console.WriteLine("2: No");
                     char answer = char.Parse(Console.ReadLine());
-                    if (answer == 'Y')
+                    if (answer == '1') //TODO: Change to switch/case
                     {
                         d20 = DiceRoll.RollD20();
-                        Console.WriteLine(d20 + Stats.parry - 6);
+                        Console.Clear();
+                        Console.WriteLine("You attempt to parry...");
+                        Console.WriteLine("You roll " + d20 + " for a total of " + (d20 + Stats.currentParry - 6));
                         Console.ReadLine();
                         Console.WriteLine("Were you hit?");
-                        Console.Write("Y/N: ");
+                        Console.WriteLine("1: Yes");
+                        Console.WriteLine("2: No");
                         answer = char.Parse(Console.ReadLine());
-                        if (answer == 'Y')
+                        if (answer == '1') //TODO: Change to switch/case
                         {
                             Console.WriteLine("How much damage did you take?");
                             string damageTaken = Console.ReadLine();
-                            int damageTakenToInt = int.Parse(damageTaken);
+                            int damageTakenToInt = int.Parse(damageTaken); //TODO: TRY CATCH
                             if (Stats.currentForceField == 0)
                             {
                                 if (Stats.currentArmor == 0)
@@ -279,12 +344,15 @@ namespace RiftsCmd
                     else
                     {
                         d20 = DiceRoll.RollD20();
-                        Console.WriteLine(d20 + Stats.parry);
+                        Console.Clear();
+                        Console.WriteLine("You attempt to parry...");
+                        Console.WriteLine("You roll " + d20 + " for a total of " + (d20 + Stats.currentParry));
                         Console.ReadLine();
                         Console.WriteLine("Were you hit?");
-                        Console.Write("Y/N: ");
+                        Console.WriteLine("1: Yes");
+                        Console.WriteLine("2: No");
                         answer = char.Parse(Console.ReadLine());
-                        if (answer == 'Y')
+                        if (answer == '1') //TODO: Change to switch/case
                         {
                             Console.WriteLine("How much damage did you take?");
                             string damageTaken = Console.ReadLine();
@@ -382,7 +450,9 @@ namespace RiftsCmd
                     }
                 case 2:
                     d20 = DiceRoll.RollD20();
-                    Console.WriteLine(d20 + Stats.dodge);
+                    Console.Clear();
+                    Console.WriteLine("You attempt to dodge...");
+                    Console.WriteLine("You roll " + d20 + " for a total of " + (d20 + Stats.currentDodge));
                     if (physicalAtks > 0)
                     {
                         physicalAtks -= 1;
@@ -393,9 +463,10 @@ namespace RiftsCmd
                     }
                     Console.ReadLine();
                     Console.WriteLine("Were you hit?");
-                    Console.Write("Y/N: ");
+                    Console.WriteLine("1: Yes");
+                    Console.WriteLine("2: No");
                     answer = char.Parse(Console.ReadLine());
-                    if (answer == 'Y')
+                    if (answer == '1') //TODO: Change to switch/case
                     {
                         Console.WriteLine("How much damage did you take?");
                         string damageTaken = Console.ReadLine();
@@ -491,7 +562,7 @@ namespace RiftsCmd
                     }
                     break;
                 case 3:
-                    MainApp.MainMenu();
+                    CombatMenu();
                     break;
                 default:
                     Console.WriteLine("You must make a valid selection");
