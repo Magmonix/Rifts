@@ -108,6 +108,10 @@ namespace RiftsCmd
             switch (inputToInt)
             {
                 case 1:
+                    int dmg = AttackTypes.MagicAttacks();
+                    Console.WriteLine(dmg);
+                    Console.ReadLine();
+                    Consumables.ConsumablesCheck();
                     if (magicalAtks > 0)
                     {
                         magicalAtks -= 1;
@@ -116,8 +120,6 @@ namespace RiftsCmd
                     {
                         allAtks -= 1;
                     }
-                    Consumables.ConsumablesCheck();
-                    //Type of Spell
                     //Roll for hit
                     //D20 check
                     //Check if Hit
