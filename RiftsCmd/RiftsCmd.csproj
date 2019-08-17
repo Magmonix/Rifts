@@ -49,8 +49,9 @@
   <ItemGroup>
     <Compile Include="AttackTypes.cs" />
     <Compile Include="Combat.cs" />
-    <Compile Include="Consumables.cs" />
+    <Compile Include="ConsumablesInventory.cs" />
     <Compile Include="DiceRoll.cs" />
+    <Compile Include="Equipment.cs" />
     <Compile Include="MainApp.cs" />
     <Compile Include="Stats.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

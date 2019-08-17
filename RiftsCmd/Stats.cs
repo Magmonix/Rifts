@@ -4,350 +4,292 @@ namespace RiftsCmd
 {
     class Stats
     {
-        public static string[] stats = new string[14];
-        public static string name;
-        public static int strike;
-        public static int parry;
-        public static int dodge;
-        public static int crit;
-        public static int allAtk;
-        public static int magicalAtk;
-        public static int physicalAtk;
-        public static int MDC;
-        public static int forceField;
-        public static int armor;
-        public static int PPE;
-        public static int ISP;
-        public static int darkPoints;
-        public static int currentStrike;
-        public static int currentParry;
-        public static int currentDodge;
-        public static int currentCrit;
-        public static int currentAllAtk;
-        public static int currentMagicalAtk;
-        public static int currentPhysicalAtk;
-        public static int currentMDC;
-        public static int currentForceField;
-        public static int currentArmor;
-        public static int currentPPE;
-        public static int currentISP;
-        public static int currentDarkPoints;
+        //TODO: Move this to a character sheet class
+        public string Stat { get; set; }
+        public string Value { get; set; }
+        public Stats(string stat, string value)
+        {
+            Stat = stat;
+            Value = value;
+        }
+        public static Stats sheetName = new Stats("Character Name", "");
+        public static Stats sheetLevel = new Stats("Level", "");
+        public static Stats sheetStrike = new Stats("Strike", "");
+        public static Stats sheetParry = new Stats("Parry", "");
+        public static Stats sheetDodge = new Stats("Dodge", "");
+        public static Stats sheetCrit = new Stats("Critical Strike", "");
+        public static Stats sheetAllAtk = new Stats("All Attacks", "");
+        public static Stats sheetMagicalAtk = new Stats("Magical Attacks", "");
+        public static Stats sheetPhysicalAtk = new Stats("Physical Attacks", "");
+        public static Stats sheetMdc = new Stats("MDC", "");
+        public static Stats sheetForceField = new Stats("Force Field", "");
+        public static Stats sheetArmor = new Stats("Armor", "");
+        public static Stats sheetPpe = new Stats("PPE", "");
+        public static Stats sheetIsp = new Stats("ISP", "");
+        public static Stats sheetDarkPoints = new Stats("Dark Points", "");
+
+
+        public string CurrentStat { get; set; }
+        public int CurrentValue { get; set; }
+        public Stats(string currentStat, int currentValue)
+        {
+            CurrentStat = currentStat;
+            CurrentValue = currentValue;
+        }
+        public static Stats currentRelativeSpellLevel = new Stats("Relative Spell Level", 0);
+        public static Stats currentStrike = new Stats("Strike", 0);
+        public static Stats currentParry = new Stats("Parry", 0);
+        public static Stats currentDodge = new Stats("Dodge", 0);
+        public static Stats currentCrit = new Stats("Critical Strike", 0);
+        public static Stats currentAllAtk = new Stats("All Attacks", 0);
+        public static Stats currentMagicalAtk = new Stats("Magical Attacks", 0);
+        public static Stats currentPhysicalAtk = new Stats("Physical Attacks", 0);
+        public static Stats currentMDC = new Stats("MDC", 0);
+        public static Stats currentForceField = new Stats("Force Field", 0);
+        public static Stats currentArmor = new Stats("Armor", 0);
+        public static Stats currentPPE = new Stats("PPE", 0);
+        public static Stats currentISP = new Stats("ISP", 0);
+        public static Stats currentDarkPoints = new Stats("Dark Points", 0);
 
 
 
         public static void CreateOrViewCharacter()
         {
-            if (String.IsNullOrEmpty(stats[0]) == true) //Create Character
+            if (String.IsNullOrEmpty(sheetName.Value) == true)
             {
                 Console.Clear();
-                stats = GetStats();
-                InitializeStats();
-                OutputStats(name, strike, parry, dodge, crit, allAtk, magicalAtk, physicalAtk, MDC, forceField, armor, PPE, ISP, darkPoints);
+                CreateCharacter();
+                InitializeNewCharacter();
                 MainApp.Main();
             }
-            else //View Stats
+            else
             {
-                Console.Clear();
-                ReinitializeStats();
-                OutputStats(name, strike, parry, dodge, crit, allAtk, magicalAtk, physicalAtk, MDC, forceField, armor, PPE, ISP, darkPoints);
+                ViewStats();
                 MainApp.Main();
             }
         }
 
-        public static void EditStats()
+        public static void EditSheetStats()
         {
-            //TODO: Add exception for a character not existing. Should we ask to redirect user to CreateOrViewCharacter()?
-
-            Console.Clear();
-            Console.WriteLine("Which stat do you want to edit?");
-            Console.WriteLine("1: Name");
-            Console.WriteLine("2: Strike");
-            Console.WriteLine("3: Parry");
-            Console.WriteLine("4: Dodge");
-            Console.WriteLine("5: Crit");
-            Console.WriteLine("6: All Attacks");
-            Console.WriteLine("7: Magical Attacks");
-            Console.WriteLine("8: Physical Attacks");
-            Console.WriteLine("9: MDC");
-            Console.WriteLine("10: ForceField");
-            Console.WriteLine("11: Armor");
-            Console.WriteLine("12: PPE");
-            Console.WriteLine("13: ISP");
-            Console.WriteLine("14: Dark Points");
-            string input = Console.ReadLine();
-            int inputToInt = int.Parse(input);
-            switch (inputToInt)
+            try
             {
-                case 1:
-                    Console.Clear();
-                    Console.WriteLine("What is the new Name?");
-                    stats[0] = Console.ReadLine();
-                    CreateOrViewCharacter();
-                    break;
-                case 2:
-                    Console.Clear();
-                    Console.WriteLine("What is the new Strike?");
-                    stats[1] = Console.ReadLine();
-                    CreateOrViewCharacter();
-                    break;
-                case 3:
-                    Console.Clear();
-                    Console.WriteLine("What is the new Parry?");
-                    stats[2] = Console.ReadLine();
-                    CreateOrViewCharacter();
-                    break;
-                case 4:
-                    Console.Clear();
-                    Console.WriteLine("What is the new Dodge?");
-                    stats[3] = Console.ReadLine();
-                    CreateOrViewCharacter();
-                    break;
-                case 5:
-                    Console.Clear();
-                    Console.WriteLine("What is the new Crit?");
-                    stats[4] = Console.ReadLine();
-                    CreateOrViewCharacter();
-                    break;
-                case 6:
-                    Console.Clear();
-                    Console.WriteLine("What is the new All Attacks?");
-                    stats[5] = Console.ReadLine();
-                    CreateOrViewCharacter();
-                    break;                
-                case 7:
-                    Console.Clear();
-                    Console.WriteLine("What is the new Magical Attacks?");
-                    stats[6] = Console.ReadLine();
-                    CreateOrViewCharacter();
-                    break;
-                case 8:
-                    Console.Clear();
-                    Console.WriteLine("What is the new Physical Attacks?");
-                    stats[7] = Console.ReadLine();
-                    CreateOrViewCharacter();
-                    break;
-                case 9:
-                    Console.Clear();
-                    Console.WriteLine("What is the new MDC?");
-                    stats[8] = Console.ReadLine();
-                    CreateOrViewCharacter();
-                    break;
-                case 10:
-                    Console.Clear();
-                    Console.WriteLine("What is the new Force Field?");
-                    stats[9] = Console.ReadLine();
-                    CreateOrViewCharacter();
-                    break;
-                case 11:
-                    Console.Clear();
-                    Console.WriteLine("What is the new Armor?");
-                    stats[10] = Console.ReadLine();
-                    CreateOrViewCharacter();
-                    break;
-                case 12:
-                    Console.Clear();
-                    Console.WriteLine("What is the new PPE?");
-                    stats[11] = Console.ReadLine();
-                    CreateOrViewCharacter();
-                    break;
-                case 13:
-                    Console.Clear();
-                    Console.WriteLine("What is the new ISP?");
-                    stats[12] = Console.ReadLine();
-                    CreateOrViewCharacter();
-                    break;
-                case 14:
-                    Console.Clear();
-                    Console.WriteLine("What is the new Dark Points?");
-                    stats[13] = Console.ReadLine();
-                    CreateOrViewCharacter();
-                    break;
-                default:
-                    Console.WriteLine("You must make a valid selection");
-                    Console.ReadLine();
-                    MainApp.Main();
-                    break;
-
+                Console.Clear();
+                Console.WriteLine("Which character sheet stat do you want to edit?");
+                Console.WriteLine("1: Name");
+                Console.WriteLine("2: Level");
+                Console.WriteLine("3: Strike");
+                Console.WriteLine("4: Parry");
+                Console.WriteLine("5: Dodge");
+                Console.WriteLine("6: Crit");
+                Console.WriteLine("7: All Attacks");
+                Console.WriteLine("8: Magical Attacks");
+                Console.WriteLine("9: Physical Attacks");
+                Console.WriteLine("10: MDC");
+                Console.WriteLine("11: ForceField");
+                Console.WriteLine("12: Armor");
+                Console.WriteLine("13: PPE");
+                Console.WriteLine("14: ISP");
+                Console.WriteLine("15: Dark Points");
+                string input = Console.ReadLine();
+                int inputToInt = int.Parse(input);
+                switch (inputToInt)
+                {
+                    case 1:
+                        Console.Clear();
+                        Console.WriteLine("What is the new Name?");
+                        Stats.sheetName.Value = Console.ReadLine();
+                        CreateOrViewCharacter();
+                        break;
+                    case 2:
+                        Console.Clear();
+                        Console.WriteLine("What is the new Level?");
+                        Stats.sheetLevel.Value = Console.ReadLine();
+                        CreateOrViewCharacter();
+                        break;
+                    case 3:
+                        Console.Clear();
+                        Console.WriteLine("What is the new Strike?");
+                        Stats.sheetStrike.Value = Console.ReadLine();
+                        CreateOrViewCharacter();
+                        break;
+                    case 4:
+                        Console.Clear();
+                        Console.WriteLine("What is the new Parry?");
+                        Stats.sheetParry.Value = Console.ReadLine();
+                        CreateOrViewCharacter();
+                        break;
+                    case 5:
+                        Console.Clear();
+                        Console.WriteLine("What is the new Dodge?");
+                        Stats.sheetDodge.Value = Console.ReadLine();
+                        CreateOrViewCharacter();
+                        break;
+                    case 6:
+                        Console.Clear();
+                        Console.WriteLine("What is the new Critical Strike?");
+                        Stats.sheetCrit.Value = Console.ReadLine();
+                        CreateOrViewCharacter();
+                        break;
+                    case 7:
+                        Console.Clear();
+                        Console.WriteLine("What is the new All Attacks?");
+                        Stats.sheetAllAtk.Value = Console.ReadLine();
+                        CreateOrViewCharacter();
+                        break;
+                    case 8:
+                        Console.Clear();
+                        Console.WriteLine("What is the new Magical Attacks?");
+                        Stats.sheetMagicalAtk.Value = Console.ReadLine();
+                        CreateOrViewCharacter();
+                        break;
+                    case 9:
+                        Console.Clear();
+                        Console.WriteLine("What is the new Physical Attacks?");
+                        Stats.sheetPhysicalAtk.Value = Console.ReadLine();
+                        CreateOrViewCharacter();
+                        break;
+                    case 10:
+                        Console.Clear();
+                        Console.WriteLine("What is the new MDC?");
+                        Stats.sheetMdc.Value = Console.ReadLine();
+                        CreateOrViewCharacter();
+                        break;
+                    case 11:
+                        Console.Clear();
+                        Console.WriteLine("What is the new Force Field?");
+                        Stats.sheetForceField.Value = Console.ReadLine();
+                        CreateOrViewCharacter();
+                        break;
+                    case 12:
+                        Console.Clear();
+                        Console.WriteLine("What is the new Armor?");
+                        Stats.sheetArmor.Value = Console.ReadLine();
+                        CreateOrViewCharacter();
+                        break;
+                    case 13:
+                        Console.Clear();
+                        Console.WriteLine("What is the new PPE?");
+                        Stats.sheetPpe.Value = Console.ReadLine();
+                        CreateOrViewCharacter();
+                        break;
+                    case 14:
+                        Console.Clear();
+                        Console.WriteLine("What is the new ISP?");
+                        Stats.sheetIsp.Value = Console.ReadLine();
+                        CreateOrViewCharacter();
+                        break;
+                    case 15:
+                        Console.Clear();
+                        Console.WriteLine("What is the new Dark Points?");
+                        Stats.sheetDarkPoints.Value = Console.ReadLine();
+                        CreateOrViewCharacter();
+                        break;
+                    case 16:
+                        MainApp.MainMenu();
+                        break;
+                    default:
+                        Console.WriteLine("You must make a valid selection");
+                        Console.WriteLine("Press the Enter key to continue...");
+                        Console.ReadLine();
+                        MainApp.Main();
+                        break;
+                }
             }
-
+            catch (FormatException)
+            {
+                Console.WriteLine("You must enter a valid option");
+                Console.WriteLine("Press the Enter key to continue...");
+                Console.ReadLine();
+            }
 
         }
 
-        public static void OutputStats(string name, int strike, int parry, int dodge, 
-                                        int crit, int allAtk, int magicalAtk, int physicalAtk, int MDC, int forceField, 
-                                        int armor, int PPE, int ISP, int darkPoints)
+ 
+        public static void ViewStats()
         {
             Console.Clear();
-            Console.WriteLine("Name: " + name);
-            Console.WriteLine("Strike: " + strike);
-            Console.WriteLine("Parry: " + parry);
-            Console.WriteLine("Dodge: " + dodge);
-            Console.WriteLine("Crit: " + crit);
-            Console.WriteLine("All Atk's: " + allAtk);
-            Console.WriteLine("Magic Atk's: " + magicalAtk);
-            Console.WriteLine("Physical Atk's: " + physicalAtk);
-            Console.WriteLine("MDC: " + MDC);
-            Console.WriteLine("Force Field: " + forceField);
-            Console.WriteLine("Armor: " + armor);
-            Console.WriteLine("PPE: " + PPE);
-            Console.WriteLine("ISP: " + ISP);
-            Console.WriteLine("Dark Points: " + darkPoints);
+            Console.WriteLine("Here are your character sheet stats:");
+            Console.WriteLine("Your {0} is {1}", Stats.sheetName.Stat, Stats.sheetName.Value);
+            Console.WriteLine("Your {0} is {1}", Stats.sheetLevel.Stat, Stats.sheetLevel.Value);
+            Console.WriteLine("Your {0} is {1}", Stats.sheetStrike.Stat, Stats.sheetStrike.Value);
+            Console.WriteLine("Your {0} is {1}", Stats.sheetParry.Stat, Stats.sheetParry.Value);
+            Console.WriteLine("Your {0} is {1}", Stats.sheetDodge.Stat, Stats.sheetDodge.Value);
+            Console.WriteLine("Your {0} is {1}", Stats.sheetCrit.Stat, Stats.sheetCrit.Value);
+            Console.WriteLine("Your {0} is {1}", Stats.sheetAllAtk.Stat, Stats.sheetAllAtk.Value);
+            Console.WriteLine("Your {0} is {1}", Stats.sheetMagicalAtk.Stat, Stats.sheetMagicalAtk.Value);
+            Console.WriteLine("Your {0} is {1}", Stats.sheetPhysicalAtk.Stat, Stats.sheetPhysicalAtk.Value);
+            Console.WriteLine("Your {0} is {1}", Stats.sheetMdc.Stat, Stats.sheetMdc.Value);
+            Console.WriteLine("Your {0} is {1}", Stats.sheetForceField.Stat, Stats.sheetForceField.Value);
+            Console.WriteLine("Your {0} is {1}", Stats.sheetArmor.Stat, Stats.sheetArmor.Value);
+            Console.WriteLine("Your {0} is {1}", Stats.sheetPpe.Stat, Stats.sheetPpe.Value);
+            Console.WriteLine("Your {0} is {1}", Stats.sheetIsp.Stat, Stats.sheetIsp.Value);
+            Console.WriteLine("Your {0} is {1}", Stats.sheetDarkPoints.Stat, Stats.sheetDarkPoints.Value);
+            Console.WriteLine("Press the Enter key to continue");
             Console.ReadLine();
         }
 
-        public static void InitializeStats()
+        public static void CreateCharacter()
         {
-            name = stats[0];
-            strike = int.Parse(stats[1]);
-            parry = int.Parse(stats[2]);
-            dodge = int.Parse(stats[3]);
-            crit = int.Parse(stats[4]);
-            allAtk = int.Parse(stats[5]);
-            magicalAtk = int.Parse(stats[6]);
-            physicalAtk = int.Parse(stats[7]);
-            MDC = int.Parse(stats[8]);
-            forceField = int.Parse(stats[9]);
-            armor = int.Parse(stats[10]);
-            PPE = int.Parse(stats[11]);
-            ISP = int.Parse(stats[12]);
-            darkPoints = int.Parse(stats[13]);
-            currentStrike = int.Parse(stats[1]);
-            currentParry = int.Parse(stats[2]);
-            currentDodge = int.Parse(stats[3]);
-            currentCrit = int.Parse(stats[4]);
-            currentAllAtk = int.Parse(stats[5]);
-            currentMagicalAtk = int.Parse(stats[6]);
-            currentPhysicalAtk = int.Parse(stats[7]);
-            currentMDC = int.Parse(stats[8]);
-            currentForceField = int.Parse(stats[9]);
-            currentArmor = int.Parse(stats[10]);
-            currentPPE = int.Parse(stats[11]);
-            currentISP = int.Parse(stats[12]);
-            currentDarkPoints = int.Parse(stats[13]);
-        }
-        public static void ReinitializeStats()
-        {
-            name = stats[0];
-            strike = int.Parse(stats[1]);
-            parry = int.Parse(stats[2]);
-            dodge = int.Parse(stats[3]);
-            crit = int.Parse(stats[4]);
-            allAtk = int.Parse(stats[5]);
-            magicalAtk = int.Parse(stats[6]);
-            physicalAtk = int.Parse(stats[7]);
-            MDC = int.Parse(stats[8]);
-            forceField = int.Parse(stats[9]);
-            armor = int.Parse(stats[10]);
-            PPE = int.Parse(stats[11]);
-            ISP = int.Parse(stats[12]);
-            darkPoints = int.Parse(stats[13]);
+            Console.Clear();
+            Console.Write("Input {0}: ", Stats.sheetName.Stat);
+            Stats.sheetName.Value = Console.ReadLine();
+            Console.Write("Input {0}: ", Stats.sheetLevel.Stat);
+            Stats.sheetLevel.Value = Console.ReadLine();
+            Console.Write("Input {0}: ", Stats.sheetStrike.Stat);
+            Stats.sheetStrike.Value = Console.ReadLine();
+            Console.Write("Input {0}: ", Stats.sheetParry.Stat);
+            Stats.sheetParry.Value = Console.ReadLine();
+            Console.Write("Input {0}: ", Stats.sheetDodge.Stat);
+            Stats.sheetDodge.Value = Console.ReadLine();
+            Console.Write("Input {0}: ", Stats.sheetCrit.Stat);
+            Stats.sheetCrit.Value = Console.ReadLine();
+            Console.Write("Input {0}: ", Stats.sheetAllAtk.Stat);
+            Stats.sheetAllAtk.Value = Console.ReadLine();
+            Console.Write("Input {0}: ", Stats.sheetMagicalAtk.Stat);
+            Stats.sheetMagicalAtk.Value = Console.ReadLine();
+            Console.Write("Input {0}: ", Stats.sheetPhysicalAtk.Stat);
+            Stats.sheetPhysicalAtk.Value = Console.ReadLine();
+            Console.Write("Input {0}: ", Stats.sheetMdc.Stat);
+            Stats.sheetMdc.Value = Console.ReadLine();
+            Console.Write("Input {0}: ", Stats.sheetForceField.Stat);
+            Stats.sheetForceField.Value = Console.ReadLine();
+            Console.Write("Input {0}: ", Stats.sheetArmor.Stat);
+            Stats.sheetArmor.Value = Console.ReadLine();
+            Console.Write("Input {0}: ", Stats.sheetPpe.Stat);
+            Stats.sheetPpe.Value = Console.ReadLine();
+            Console.Write("Input {0}: ", Stats.sheetIsp.Stat);
+            Stats.sheetIsp.Value = Console.ReadLine();
+            Console.Write("Input {0}: ", Stats.sheetDarkPoints.Stat);
+            Stats.sheetDarkPoints.Value = Console.ReadLine();
         }
 
-        public static string[] GetStats() //Run each of the gets and save the returns to a string array
+        public static void InitializeNewCharacter()
         {
-            stats[0] = GetName();
-            stats[1] = GetStrike();
-            stats[2] = GetParry();
-            stats[3] = GetDodge();
-            stats[4] = GetCrit();
-            stats[5] = GetAllAtk();
-            stats[6] = GetMagicalAtk();
-            stats[7] = GetPhysicalAtk();
-            stats[8] = GetMDC();
-            stats[9] = GetForceField();
-            stats[10] = GetArmor();
-            stats[11] = GetPPE();
-            stats[12]= GetISP();
-            stats[13]= GetDarkPoints();
-            return (stats);
+            try
+            {
+            Stats.currentRelativeSpellLevel.CurrentValue = int.Parse(Stats.sheetLevel.Value);
+            Stats.currentStrike.CurrentValue = int.Parse(Stats.sheetStrike.Value);
+            Stats.currentParry.CurrentValue = int.Parse(Stats.sheetParry.Value);
+            Stats.currentDodge.CurrentValue = int.Parse(Stats.sheetDodge.Value);
+            Stats.currentCrit.CurrentValue = int.Parse(Stats.sheetCrit.Value);
+            Stats.currentAllAtk.CurrentValue = int.Parse(Stats.sheetAllAtk.Value);
+            Stats.currentMagicalAtk.CurrentValue = int.Parse(Stats.sheetMagicalAtk.Value);
+            Stats.currentPhysicalAtk.CurrentValue = int.Parse(Stats.sheetPhysicalAtk.Value);
+            Stats.currentMDC.CurrentValue = int.Parse(Stats.sheetMdc.Value);
+            Stats.currentForceField.CurrentValue = int.Parse(Stats.sheetForceField.Value);
+            Stats.currentArmor.CurrentValue = int.Parse(Stats.sheetArmor.Value);
+            Stats.currentPPE.CurrentValue = int.Parse(Stats.sheetPpe.Value);
+            Stats.currentISP.CurrentValue = int.Parse(Stats.sheetIsp.Value);
+            Stats.currentDarkPoints.CurrentValue = int.Parse(Stats.sheetDarkPoints.Value);
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("You must enter whole numbers for your character's stats...");
+                Stats.sheetName.Value = "";
+                Console.WriteLine("Press the Enter key to continue...");
+                Console.ReadLine();
+                CreateOrViewCharacter();
+            }
         }
-
-        //This region is the legwork of stats input
-        #region GETSTATS
-        public static string GetName()
-        {
-            Console.Write("Input Character name: ");
-            string name = Console.ReadLine();
-            return (name);
-        }
-        public static string GetStrike()
-        {
-            Console.Write("Input Strike: ");
-            string strike = Console.ReadLine();
-            return (strike);
-        }
-        public static string GetParry()
-        {
-            Console.Write("Input Parry: ");
-            string parry = Console.ReadLine();
-            return (parry);
-        }
-        public static string GetDodge()
-        {
-            Console.Write("Input Dodge: ");
-            string dodge = Console.ReadLine();
-            return (dodge);
-        }
-        public static string GetCrit()
-        {
-            Console.Write("Input Crit: ");
-            string crit = Console.ReadLine();
-            return (crit);
-        }
-        public static string GetAllAtk()
-        {
-            Console.Write("Input All Atk: ");
-            string atk = Console.ReadLine();
-            return (atk);
-        }
-        public static string GetMagicalAtk()
-        {
-            Console.Write("Input Magical Atk: ");
-            string atk = Console.ReadLine();
-            return (atk);
-        }        
-        public static string GetPhysicalAtk()
-        {
-            Console.Write("Input Physical Atk: ");
-            string atk = Console.ReadLine();
-            return (atk);
-        }
-        public static string GetMDC()
-        {
-            Console.Write("Input MDC: ");
-            string mdc = Console.ReadLine();
-            return (mdc);
-        }
-        public static string GetForceField()
-        {
-            Console.Write("Input ForceField: ");
-            string forceField = Console.ReadLine();
-            return (forceField);
-        }
-        public static string GetArmor()
-        {
-            Console.Write("Input Armor: ");
-            string armor = Console.ReadLine();
-            return (armor);
-        }
-        public static string GetPPE()
-        {
-            Console.Write("Input PPE: ");
-            string ppe = Console.ReadLine();
-            return (ppe);
-        }
-        public static string GetISP()
-        {
-            Console.Write("Input ISP: ");
-            string isp = Console.ReadLine();
-            return (isp);
-        }
-        public static string GetDarkPoints()
-        {
-            Console.Write("Input Dark Points: ");
-            string darkPoints = Console.ReadLine();
-            return (darkPoints);
-        }
-        #endregion
     }
 }
